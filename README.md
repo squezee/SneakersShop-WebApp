@@ -1,6 +1,9 @@
 Sneakers Shop - Web app - Full REST API - Full Admin Panel
+
 Stack of technologies:
+
     Server: PHP, MySQL (PDO)
+    
     Client: ReactJS, webpack
 
 
