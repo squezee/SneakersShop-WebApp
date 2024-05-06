@@ -1,0 +1,43 @@
+
+
+
+<?php
+ try {
+    // подключаемся к серверу
+    $conn = new PDO("mysql:host=localhost;dbname=shopdb", "root", "Nike7363");
+    $sql = "INSERT INTO Products (name, price, img, description, sizes, imgs, brands, category,isNewArrival) VALUES (:productname, :productprice, :productimg, :productdescription, :productsizes, :productimgs,:productbrands, :productCategory, :productIsNewArrival)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(":productname", $_GET['name']);
+        $stmt->bindValue(":productprice", $_GET['price']);
+        $stmt->bindValue(":productimg", $_GET['img']);
+        $stmt->bindValue(":productdescription", $_GET['description']);
+        $stmt->bindValue(":productsizes", $_GET['sizes']);
+        $stmt->bindValue(":productimgs", $_GET['imgs']);
+        $stmt->bindValue(":productbrands", $_GET['brands']);
+        $stmt->bindValue(":productCategory", $_GET['category']);
+        $stmt->bindValue(":productIsNewArrival", $_GET['isNewArrival']);
+        $affectedRowsNumber = $stmt->execute();
+        
+        if($affectedRowsNumber > 0 ){
+            echo "Data successfully added";
+        }
+}
+catch (PDOException $e) {
+    echo "Database error: " . $e->getMessage();
+}
+?>
+
+//(id integer auto_increment primary key, name varchar(30), price integer, img varchar(30), description varchar(500), sizes varchar(100), imgs varchar(250));
+<?php
+ try {
+    // подключаемся к серверу
+    $conn = new PDO("mysql:host=localhost;dbname=shopdb", "root", "Nike7363");
+    $sql = "CREATE TABLE Products (id integer auto_increment primary key, name varchar(30), price integer, img varchar(30), description varchar(500), sizes varchar(100), imgs varchar(250), brands varchar(100), category varchar(30), isNewArrival varchar(1));";
+    if($conn->exec($sql)){
+        echo "ok";
+    }
+}
+catch (PDOException $e) {
+    echo "Database error: " . $e->getMessage();
+}
+?>
